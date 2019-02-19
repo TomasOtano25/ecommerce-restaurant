@@ -1,10 +1,12 @@
 ﻿namespace EcommerceRestaurant.Web.Data
 {
-    using EcommerceRestaurant.Web.Data.Entities;
+    using Entities;
+    using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
     using Microsoft.EntityFrameworkCore;
     // Ctrl + .
 
-    public class DataContext: DbContext
+    // public class DataContext: DbContext
+    public class DataContext: IdentityDbContext<User>
     {
         public DbSet<Product> Products { get; set; }
 
