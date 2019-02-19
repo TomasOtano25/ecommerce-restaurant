@@ -32,6 +32,11 @@ namespace EcommerceRestaurant.Web
                 cfg.UseSqlServer(this.Configuration.GetConnectionString("DefaultConnection"));
             });
 
+            // SeedDb
+            services.AddTransient<SeedDb>(); // Injeccion se elimina
+
+            services.AddScoped<IRepository, Repository>(); // Injeccion permanente
+
             services.Configure<CookiePolicyOptions>(options =>
             {
                 // This lambda determines whether user consent for non-essential cookies is needed for a given request.
