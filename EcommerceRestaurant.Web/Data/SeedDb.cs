@@ -1,31 +1,34 @@
 ﻿namespace EcommerceRestaurant.Web.Data
 {
-    using Entities;
-    using Microsoft.AspNetCore.Identity;
     using System;
     using System.Linq;
     using System.Threading.Tasks;
-
-
+    using Helpers;
+    using Entities;
+    using Microsoft.AspNetCore.Identity;
+   
     public class SeedDb
     {
         private readonly DataContext context;
-        private readonly UserManager<User> userManager;
+        private readonly IUserHelper userHelper;
         private readonly Random random;
 
-        public SeedDb(DataContext context, UserManager<User> userManager)
+        public SeedDb(DataContext context, IUserHelper userHelper)
         {
             this.context = context;
-            this.userManager = userManager;
+            this.UserHelper = userHelper;
+          
             this.random = new Random();
         }
+
+        public IUserHelper UserHelper { get; }
 
         public async Task SeedAsync()
         {
             await this.context.Database.EnsureCreatedAsync();
 
 
-            var user = await this.userManager.FindByEmailAsync("tomasotano25@gmail.com");
+            var user = await this.userHelper.GetUserByEmailAsync("tomasotano25@gmail.com");
             if (user == null)
             {
                 user = new User
@@ -37,7 +40,7 @@
                     PhoneNumber = "8496388432"
                 };
 
-                var result = await this.userManager.CreateAsync(user, "T12121212");
+                var result = await this.userHelper.AddUserAsync(user, "T12121212");
                 if (result != IdentityResult.Success)
                 {
                     throw new InvalidOperationException("Could not create the user in seeder");

@@ -45,7 +45,11 @@
             // SeedDb
             services.AddTransient<SeedDb>(); // Injeccion se elimina
 
-            services.AddScoped<IRepository, Repository>(); // Injeccion permanente
+            // services.AddScoped<IRepository, Repository>(); // Injeccion permanente
+
+            services.AddScoped<IProductRepository, ProductRepository>();
+
+            services.AddScoped<ICountryRepository, CountryRepository>();
 
             services.AddScoped<IUserHelper, UserHelper>();
 
