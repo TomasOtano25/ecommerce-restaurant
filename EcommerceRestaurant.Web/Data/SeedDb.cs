@@ -16,8 +16,7 @@
         public SeedDb(DataContext context, IUserHelper userHelper)
         {
             this.context = context;
-            this.UserHelper = userHelper;
-          
+            this.userHelper = userHelper;
             this.random = new Random();
         }
 
