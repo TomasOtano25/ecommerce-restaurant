@@ -1,21 +1,17 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using EcommerceRestaurant.Web.Data;
-using EcommerceRestaurant.Web.Data.Entities;
-using Microsoft.AspNetCore.Builder;
-using Microsoft.AspNetCore.Hosting;
-using Microsoft.AspNetCore.Http;
-using Microsoft.AspNetCore.HttpsPolicy;
-using Microsoft.AspNetCore.Identity;
-using Microsoft.AspNetCore.Mvc;
-using Microsoft.EntityFrameworkCore;
-using Microsoft.Extensions.Configuration;
-using Microsoft.Extensions.DependencyInjection;
+﻿namespace EcommerceRestaurant.Web
+{ // shift + alt
+    using Data;
+    using Data.Entities;
+    using Helpers;
+    using Microsoft.AspNetCore.Builder;
+    using Microsoft.AspNetCore.Hosting;
+    using Microsoft.AspNetCore.Http;
+    using Microsoft.AspNetCore.Identity;
+    using Microsoft.AspNetCore.Mvc;
+    using Microsoft.EntityFrameworkCore;
+    using Microsoft.Extensions.Configuration;
+    using Microsoft.Extensions.DependencyInjection;
 
-namespace EcommerceRestaurant.Web
-{
     public class Startup
     {
         public Startup(IConfiguration configuration)
@@ -28,7 +24,8 @@ namespace EcommerceRestaurant.Web
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-            services.AddIdentity<User, IdentityRole>(cfg => {
+            services.AddIdentity<User, IdentityRole>(cfg =>
+            {
                 cfg.User.RequireUniqueEmail = true;
                 cfg.Password.RequireDigit = false;
                 cfg.Password.RequiredUniqueChars = 0;
@@ -40,7 +37,7 @@ namespace EcommerceRestaurant.Web
             .AddEntityFrameworkStores<DataContext>();
 
             // SQL Connection
-            services.AddDbContext<DataContext>(cfg => 
+            services.AddDbContext<DataContext>(cfg =>
             {
                 cfg.UseSqlServer(this.Configuration.GetConnectionString("DefaultConnection"));
             });
@@ -49,6 +46,8 @@ namespace EcommerceRestaurant.Web
             services.AddTransient<SeedDb>(); // Injeccion se elimina
 
             services.AddScoped<IRepository, Repository>(); // Injeccion permanente
+
+            services.AddScoped<IUserHelper, UserHelper>();
 
             services.Configure<CookiePolicyOptions>(options =>
             {
