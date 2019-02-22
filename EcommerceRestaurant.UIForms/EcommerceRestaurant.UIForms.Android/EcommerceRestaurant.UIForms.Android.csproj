@@ -3,7 +3,7 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{C564A781-21F1-478A-ABDB-638993B7ADF5}</ProjectGuid>
+    <ProjectGuid>{D6D6A177-0402-4F2A-A970-D94BFD84BC93}</ProjectGuid>
     <ProjectTypeGuids>{EFBA0AD7-5A72-4C68-AF49-83D382785DCF};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
     <TemplateGuid>{c9e5eea5-ca05-42a1-839b-61506e0a37df}</TemplateGuid>
     <OutputType>Library</OutputType>
@@ -17,7 +17,6 @@
     <MonoAndroidAssetsPrefix>Assets</MonoAndroidAssetsPrefix>
     <AndroidUseLatestPlatformSdk>false</AndroidUseLatestPlatformSdk>
     <TargetFrameworkVersion>v8.1</TargetFrameworkVersion>
-    <AndroidEnableSGenConcurrent>true</AndroidEnableSGenConcurrent>
     <AndroidHttpClientHandlerType>Xamarin.Android.Net.AndroidClientHandler</AndroidHttpClientHandlerType>
     <NuGetPackageImportStamp>
     </NuGetPackageImportStamp>
@@ -50,12 +49,12 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <PackageReference Include="Xamarin.Forms" Version="4.0.0.62955-pre2" />
-    <PackageReference Include="Xamarin.Android.Support.Design" Version="28.0.0" />
-    <PackageReference Include="Xamarin.Android.Support.v7.AppCompat" Version="28.0.0" />
-    <PackageReference Include="Xamarin.Android.Support.v4" Version="28.0.0" />
-    <PackageReference Include="Xamarin.Android.Support.v7.CardView" Version="28.0.0" />
-    <PackageReference Include="Xamarin.Android.Support.v7.MediaRouter" Version="28.0.0" />
+    <PackageReference Include="Xamarin.Forms" Version="3.4.0.1008975" />
+    <PackageReference Include="Xamarin.Android.Support.Design" Version="27.0.2.1" />
+    <PackageReference Include="Xamarin.Android.Support.v7.AppCompat" Version="27.0.2.1" />
+    <PackageReference Include="Xamarin.Android.Support.v4" Version="27.0.2.1" />
+    <PackageReference Include="Xamarin.Android.Support.v7.CardView" Version="27.0.2.1" />
+    <PackageReference Include="Xamarin.Android.Support.v7.MediaRouter" Version="27.0.2.1" />
   </ItemGroup>
   <ItemGroup>
     <Compile Include="MainActivity.cs" />
@@ -94,7 +93,7 @@
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\EcommerceRestaurant.UIForms\EcommerceRestaurant.UIForms.csproj">
-      <Project>{E610BF88-81E8-4F62-B4D2-86F2FA4BDF3F}</Project>
+      <Project>{6915AB09-00FD-4470-A0D7-F3769455B160}</Project>
       <Name>EcommerceRestaurant.UIForms</Name>
     </ProjectReference>
   </ItemGroup>

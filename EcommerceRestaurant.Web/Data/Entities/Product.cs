@@ -2,7 +2,9 @@
 {
     using System;
     using System.ComponentModel.DataAnnotations;
-    public class Product: IEntity
+    using System.ComponentModel.DataAnnotations.Schema;
+
+    public class Product : IEntity
     {
         public int Id { get; set; }
 
@@ -29,5 +31,21 @@
         public double Stock { get; set; }
 
         public User User { get; set; }
+
+        // only read
+        [NotMapped]
+        public string ImageFullPath
+        {
+            get;    
+            
+                /*if (string.IsNullOrEmpty(this.ImageUrl))
+                {
+                    return null;
+                }
+
+                return $"https://ecommercerestaurantweb20190221110133.azurewebsites.net{this.ImageUrl}";*/
+            
+            set;
+        }
     }
 }

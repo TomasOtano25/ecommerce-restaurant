@@ -1,13 +1,10 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Diagnostics;
-using System.Linq;
-using System.Threading.Tasks;
-using Microsoft.AspNetCore.Mvc;
-using EcommerceRestaurant.Web.Models;
-
-namespace EcommerceRestaurant.Web.Controllers
+﻿namespace EcommerceRestaurant.Web.Controllers
 {
+    using System.Diagnostics;
+    using Models;
+    using Microsoft.AspNetCore.Authorization;
+    using Microsoft.AspNetCore.Mvc;
+    
     public class HomeController : Controller
     {
         public IActionResult Index()
