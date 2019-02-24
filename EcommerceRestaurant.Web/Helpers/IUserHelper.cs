@@ -12,6 +12,6 @@
 
         Task<IdentityResult> UpdateUserAsync(User user);
 
-        Task<IdentityResult> ChangePasswordUserAsync(User user, string oldPassword, string newPassword)
+        Task<IdentityResult> ChangePasswordUserAsync(User user, string oldPassword, string newPassword);
     }
 }

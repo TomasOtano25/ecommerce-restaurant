@@ -155,11 +155,14 @@ namespace EcommerceRestaurant.Web.Controllers
             return View(model);
         }
 
+        [Authorize]
         public IActionResult ChangePassword()
         {
             return this.View();
         }
 
+        [HttpPost]
+        [Authorize]
         public async Task<IActionResult> ChangePassword(ChangePasswordViewModel model)
         {
             if (this.ModelState.IsValid)
