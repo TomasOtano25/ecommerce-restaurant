@@ -24,6 +24,7 @@ namespace EcommerceRestaurant.Web.Models
         public string Password { get; set; }
 
         [Required]
+        [Compare("Password")]
         public string Confirm { get; set; }
     }
 }
