@@ -9,5 +9,9 @@
         Task<User> GetUserByEmailAsync(string email);
 
         Task<IdentityResult> AddUserAsync(User user, string password);
+
+        Task<IdentityResult> UpdateUserAsync(User user);
+
+        Task<IdentityResult> ChangePasswordUserAsync(User user, string oldPassword, string newPassword)
     }
 }
