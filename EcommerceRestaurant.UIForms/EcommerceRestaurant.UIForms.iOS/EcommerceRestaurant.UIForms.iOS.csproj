@@ -148,13 +148,7 @@
     <Reference Include="Xamarin.iOS" />
   </ItemGroup>
   <ItemGroup>
-    <PackageReference Include="Xamarin.Forms" Version="3.4.0.1008975" />
+    <PackageReference Include="Xamarin.Forms" Version="3.4.0.1029999" />
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath)\Xamarin\iOS\Xamarin.iOS.CSharp.targets" />
-  <ItemGroup>
-    <ProjectReference Include="..\EcommerceRestaurant.UIForms\EcommerceRestaurant.UIForms.csproj">
-      <Project>{6915AB09-00FD-4470-A0D7-F3769455B160}</Project>
-      <Name>EcommerceRestaurant.UIForms</Name>
-    </ProjectReference>
-  </ItemGroup>
 </Project>

@@ -9,9 +9,9 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-[assembly: global::Android.Runtime.ResourceDesignerAttribute("EcommerceRestaurant.UIClassic.Android.Resource", IsApplication=true)]
+[assembly: global::Android.Runtime.ResourceDesignerAttribute("EcommerceResturant.UIClassic.Android.Resource", IsApplication=true)]
 
-namespace EcommerceRestaurant.UIClassic.Android
+namespace EcommerceResturant.UIClassic.Android
 {
 	
 	

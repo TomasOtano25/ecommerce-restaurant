@@ -68,22 +68,23 @@
                 if (viewProduct.ImageFile != null && viewProduct.ImageFile.Length > 0)
                 {
 
-                    var uid = Guid.NewGuid();
+                    var guid = Guid.NewGuid().ToString();
 
-                    var uidName = Path.GetFileNameWithoutExtension(viewProduct.ImageFile.FileName)
-                        + uid.ToString()
-                        + Path.GetExtension(viewProduct.ImageFile.FileName);
+                    /* var uidName = Path.GetFileNameWithoutExtension(viewProduct.ImageFile.FileName)
+                        + guid
+                        + Path.GetExtension(viewProduct.ImageFile.FileName); */
+                    var file = $"{guid}.jpg";
 
                     path = Path.Combine(
                         Directory.GetCurrentDirectory(),
-                        "wwwroot\\images\\Products", uidName);
+                        "wwwroot\\images\\Products", file);
 
                     using (var stream = new FileStream(path, FileMode.Create))
                     {
                         await viewProduct.ImageFile.CopyToAsync(stream);
                     }
 
-                    path = $"~/images/Products/{uidName}";
+                    path = $"~/images/Products/{file}";
                 }
 
                 var product = ToProduct(viewProduct, path);
@@ -128,21 +129,22 @@
 
                     if (viewProduct.ImageFile != null && viewProduct.ImageFile.Length > 0)
                     {
-                        var uid = Guid.NewGuid();
-                        var uidName = Path.GetFileNameWithoutExtension(viewProduct.ImageFile.FileName)
-                            + uid.ToString()
-                            + Path.GetExtension(viewProduct.ImageFile.FileName);
+                        var guid = Guid.NewGuid().ToString();
+                        /* var uidName = Path.GetFileNameWithoutExtension(viewProduct.ImageFile.FileName)
+                            + guid
+                            + Path.GetExtension(viewProduct.ImageFile.FileName); */
+                        var file = $"{guid}.jpg";
 
                         path = Path.Combine(Directory.GetCurrentDirectory(),
                             "wwwroot\\images\\Products",
-                            uidName);
+                            file);
 
                         using (var stream = new FileStream(path, FileMode.Create))
                         {
                             await viewProduct.ImageFile.CopyToAsync(stream);
                         }
 
-                        path = $"~/images/Products/{uidName}";
+                        path = $"~/images/Products/{file}";
                     }
 
                     //TODO: Change for the logged user
