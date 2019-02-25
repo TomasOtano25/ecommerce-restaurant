@@ -1,0 +1,12 @@
+{
+  "version": "1.0.0",
+  "name": "asp.net",
+  "private": true,
+  "devDependencies": {
+    "@fortawesome/fontawesome-free": "^5.7.2",
+    "font-awesome": "^4.7.0",
+    "del": "^3.0.0",
+    "gulp": "^4.0.0"
+  },
+  "dependencies": {}
+}

@@ -9,16 +9,19 @@ namespace EcommerceRestaurant.Web.Controllers
     using Microsoft.AspNetCore.Mvc;
     using EcommerceRestaurant.Web.Helpers;
     using Microsoft.AspNetCore.Authorization;
+    using Microsoft.Extensions.Configuration;
 
     public class AccountController : Controller
     {
         private readonly SignInManager<User> signInManager;
         private readonly IUserHelper userManager;
+        private readonly IConfiguration configuration;
 
-        public AccountController(SignInManager<User> signInManager, IUserHelper userManager)
+        public AccountController(SignInManager<User> signInManager, IUserHelper userManager, IConfiguration configuration)
         {
             this.signInManager = signInManager;
             this.userManager = userManager;
+            this.configuration = configuration;
         }
 
         public IActionResult Login()
@@ -99,6 +102,7 @@ namespace EcommerceRestaurant.Web.Controllers
                         false);
                     if (resultLogin.Succeeded)
                     {
+                        await this.userManager.AddToRoleUserAsync(user, "Customer");
                         return this.RedirectToAction("Index", "Home");
                     }
 
@@ -189,5 +193,25 @@ namespace EcommerceRestaurant.Web.Controllers
             return this.View(model);
         }
 
+        [HttpPost]
+        public async Task<IActionResult> CreateToken([FromBody] LoginViewModel model)
+        {
+            if (this.ModelState.IsValid)
+            {
+                var user = await this.userManager.GetUserByEmailAsync(model.Username);
+                if (user != null)
+                {
+                    var result = await this.signInManager.CheckPasswordSignInAsync(user, model.Password, false);
+                    if (result.Succeeded)
+                    {
+                        var results = this.userManager.GenerateToken(user);
+
+                        return this.Created(string.Empty, results);
+                    }
+                }
+            }
+
+            return this.BadRequest();
+        }
     }
 }

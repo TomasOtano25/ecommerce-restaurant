@@ -11,12 +11,14 @@
     {
         private readonly DataContext context;
         private readonly IUserHelper userHelper;
+        private readonly RoleManager<IdentityRole> roleManager;
         private readonly Random random;
 
-        public SeedDb(DataContext context, IUserHelper userHelper)
+        public SeedDb(DataContext context, IUserHelper userHelper, RoleManager<IdentityRole> roleManager)
         {
             this.context = context;
             this.userHelper = userHelper;
+            this.roleManager = roleManager;
             this.random = new Random();
         }
 
@@ -26,6 +28,8 @@
         {
             await this.context.Database.EnsureCreatedAsync();
 
+            await this.CheckRole("Admin");
+            await this.CheckRole("Customer");
 
             var user = await this.userHelper.GetUserByEmailAsync("tomasotano25@gmail.com");
             if (user == null)
@@ -44,6 +48,8 @@
                 {
                     throw new InvalidOperationException("Could not create the user in seeder");
                 }
+
+                await this.userHelper.AddToRoleUserAsync(user, "Admin");
             }
 
             if (!this.context.Products.Any())
@@ -52,6 +58,18 @@
                 this.AddProduct("Second Product", user);
                 this.AddProduct("Third Product", user);
                 await this.context.SaveChangesAsync();
+            }
+        }
+
+        private async Task CheckRole(string roleName)
+        {
+            var roleExists = await this.roleManager.RoleExistsAsync(roleName);
+            if (!roleExists)
+            {
+                await this.roleManager.CreateAsync(new IdentityRole
+                {
+                    Name = roleName
+                });
             }
         }
 

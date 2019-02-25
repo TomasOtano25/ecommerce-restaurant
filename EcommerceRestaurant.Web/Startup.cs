@@ -11,6 +11,8 @@
     using Microsoft.EntityFrameworkCore;
     using Microsoft.Extensions.Configuration;
     using Microsoft.Extensions.DependencyInjection;
+    using Microsoft.IdentityModel.Tokens;
+    using System.Text;
 
     public class Startup
     {
@@ -24,7 +26,7 @@
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-             services.AddIdentity<User, IdentityRole>(cfg =>
+            services.AddIdentity<User, IdentityRole>(cfg =>
             {
                 cfg.User.RequireUniqueEmail = true;
                 cfg.Password.RequireDigit = false;
@@ -65,6 +67,23 @@
             services.AddOptions();
 
             services.Configure<MyConfig>(Configuration.GetSection("MyConfig"));
+
+            var tokenConfigSection = Configuration.GetSection("TokenConfig");
+            services.Configure<TokenConfig>(tokenConfigSection);
+
+            //TODO: Buscar puesto correcto
+            var tokenConfig = tokenConfigSection.Get<TokenConfig>();
+            services.AddAuthentication()
+                .AddCookie()
+                .AddJwtBearer(cfg =>
+                {
+                    cfg.TokenValidationParameters = new TokenValidationParameters
+                    {
+                        ValidIssuer = tokenConfig.Issuer,
+                        ValidAudience = tokenConfig.Audience,
+                        IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(tokenConfig.Key))
+                    };
+                });
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

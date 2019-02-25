@@ -12,7 +12,7 @@
     using System.Linq;
     using System.Threading.Tasks;
 
-    [Authorize]
+    [Authorize(Roles = "Admin")]
     public class ProductsController : Controller
     {
         private readonly IProductRepository productRepository;
