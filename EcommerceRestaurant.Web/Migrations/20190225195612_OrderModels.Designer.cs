@@ -4,14 +4,16 @@ using EcommerceRestaurant.Web.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace EcommerceRestaurant.Web.Migrations
 {
     [DbContext(typeof(DataContext))]
-    partial class DataContextModelSnapshot : ModelSnapshot
+    [Migration("20190225195612_OrderModels")]
+    partial class OrderModels
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -59,8 +61,7 @@ namespace EcommerceRestaurant.Web.Migrations
 
                     b.Property<int?>("OrderId");
 
-                    b.Property<decimal>("Price")
-                        .HasColumnType("decimal(18,2)");
+                    b.Property<decimal>("Price");
 
                     b.Property<int?>("ProductId");
 
@@ -85,14 +86,15 @@ namespace EcommerceRestaurant.Web.Migrations
                         .ValueGeneratedOnAdd()
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-                    b.Property<decimal>("Price")
-                        .HasColumnType("decimal(18,2)");
+                    b.Property<decimal>("Price");
 
                     b.Property<int?>("ProductId");
 
                     b.Property<double>("Quantity");
 
                     b.Property<string>("UserId");
+
+                    b.Property<decimal>("Value");
 
                     b.HasKey("Id");
 

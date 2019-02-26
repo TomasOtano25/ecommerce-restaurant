@@ -2,6 +2,7 @@
 { // shift + alt
     using Data;
     using Data.Entities;
+    using Data.Repositories;
     using Helpers;
     using Microsoft.AspNetCore.Builder;
     using Microsoft.AspNetCore.Hosting;
@@ -50,6 +51,8 @@
             // services.AddScoped<IRepository, Repository>(); // Injeccion permanente
 
             services.AddScoped<IProductRepository, ProductRepository>();
+
+            services.AddScoped<IOrderRepository, OrderRepository>();
 
             services.AddScoped<ICountryRepository, CountryRepository>();
 

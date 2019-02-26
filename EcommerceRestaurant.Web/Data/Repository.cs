@@ -4,6 +4,7 @@
     using System.Linq;
     using System.Threading.Tasks;
     using Entities;
+    using Microsoft.EntityFrameworkCore;
 
     public class Repository : IRepository
     {
@@ -21,7 +22,8 @@
 
         public Product GetProduct(int id)
         {
-            return this.context.Products.Find(id);
+            // return this.context.Products.Find(id);
+            return this.context.Products.Include(p => p.User).Where(p => p.Id == id).FirstOrDefault();
         }
 
         public void AddProduct(Product product)

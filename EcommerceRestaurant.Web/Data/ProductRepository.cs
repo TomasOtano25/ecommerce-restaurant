@@ -1,6 +1,7 @@
 ﻿namespace EcommerceRestaurant.Web.Data
 {
     using System.Linq;
+    using System.Threading.Tasks;
     using Entities;
     using Microsoft.EntityFrameworkCore;
 
@@ -27,5 +28,10 @@
 
             return products;
         }
-   }
+
+        public override async Task<Product> GetByIdAsync(int id)
+        {
+            return await this.context.Products.Include(p => p.User).Where(p => p.Id == id).FirstOrDefaultAsync();
+        }
+    }
 }

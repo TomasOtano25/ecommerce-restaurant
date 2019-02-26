@@ -19,7 +19,7 @@
             return this.context.Set<T>().AsNoTracking();
         }
 
-        public async Task<T> GetByIdAsync(int id)
+        public virtual async Task<T> GetByIdAsync(int id)
         {
             return await this.context.Set<T>()
                 .AsNoTracking()

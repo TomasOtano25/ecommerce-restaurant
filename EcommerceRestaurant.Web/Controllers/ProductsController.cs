@@ -90,7 +90,7 @@
                 var product = ToProduct(viewProduct, path);
 
                 //TODO: Change for the logged user
-                product.User = await this.userHelper.GetUserByEmailAsync("tomasotano25@gmail.com");
+                product.User = await this.userHelper.GetUserByEmailAsync(this.User.Identity.Name);
                 await this.productRepository.CreateAsync(product);
                 return RedirectToAction(nameof(Index));
             }

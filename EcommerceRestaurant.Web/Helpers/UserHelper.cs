@@ -32,6 +32,12 @@
             return await this.userManager.FindByEmailAsync(email);
         }
 
+        public async Task<User> GetUserByNameAsync(string userName)
+        {
+            return await this.userManager.FindByNameAsync(userName);
+        }
+
+
         public async Task<IdentityResult> UpdateUserAsync(User user)
         {
             return await this.userManager.UpdateAsync(user);
