@@ -1,5 +1,6 @@
 ﻿namespace EcommerceRestaurant.Web
 { // shift + alt
+    using cloudscribe.DateTimeUtils;
     using Data;
     using Data.Entities;
     using Data.Repositories;
@@ -13,6 +14,8 @@
     using Microsoft.Extensions.Configuration;
     using Microsoft.Extensions.DependencyInjection;
     using Microsoft.IdentityModel.Tokens;
+    using NodaTime;
+    using NodaTime.TimeZones;
     using System.Text;
 
     public class Startup
@@ -27,6 +30,8 @@
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
+            services.AddSingleton<IDateTimeZoneProvider>(new DateTimeZoneCache(TzdbDateTimeZoneSource.Default));
+
             services.AddIdentity<User, IdentityRole>(cfg =>
             {
                 cfg.User.RequireUniqueEmail = true;
@@ -55,6 +60,11 @@
             services.AddScoped<IOrderRepository, OrderRepository>();
 
             services.AddScoped<ICountryRepository, CountryRepository>();
+
+
+            services.AddScoped<ITimeZoneHelper, TimeZoneHelper>();
+
+            services.AddScoped<ITimeZoneIdResolver, GmtTimeZoneIdResolver>();
 
             services.AddScoped<IUserHelper, UserHelper>();
 

@@ -21,5 +21,7 @@
         Task DeleteDetailTempAsync(int id);
 
         Task<bool> ConfirmOrderAsync(string userName);
+
+        Task DeliverOrder(DeliverViewModel model);
     }
 }

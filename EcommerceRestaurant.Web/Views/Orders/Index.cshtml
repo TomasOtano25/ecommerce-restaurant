@@ -1,6 +1,10 @@
 ﻿@model IEnumerable<EcommerceRestaurant.Web.Data.Entities.Order>
+@using cloudscribe.DateTimeUtils
+@inject ITimeZoneHelper tzHelper
+@inject ITimeZoneIdResolver tzResolver
 
 @{
+    var timeZoneId = await tzResolver.GetSiteTimeZoneId();
     ViewData["Title"] = "Index";
 }
 
@@ -32,32 +36,35 @@
         </tr>
     </thead>
     <tbody>
-@foreach (var item in Model) {
-        <tr>
-            <td>
-                @Html.DisplayFor(modelItem => item.OrderDate)
-            </td>
-            <td>
-                @if (item.DeliveryDate != DateTime.MinValue)
-                {
-                    @Html.DisplayFor(modelItem => item.DeliveryDate)
-                }
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Lines)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Quantity)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Value)
-            </td>
-            <td>
-                <a asp-action="Edit" asp-route-id="@item.Id" class="btn btn-warning">Edit</a> |
-                <a asp-action="Details" asp-route-id="@item.Id" class="btn btn-info">Details</a> |
-                <a asp-action="Delete" asp-route-id="@item.Id" class="btn btn-danger">Delete</a>
-            </td>
-        </tr>
-}
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @tzHelper.ConvertToLocalTime(item.OrderDate, timeZoneId).ToString("g")
+                    @Html.DisplayFor(modelItem => item.OrderDate)
+                </td>
+                <td>
+                    @if (item.DeliveryDate != DateTime.MinValue)
+                    {
+                        @Html.DisplayFor(modelItem => item.DeliveryDate)
+                    }
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Lines)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Quantity)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Value)
+                </td>
+                <td id="@item.Id">
+                    <a asp-action="Edit" asp-route-id="@item.Id" class="btn btn-warning">Edit</a>
+                    <a asp-action="Details" asp-route-id="@item.Id" class="btn btn-info">Details</a>
+                    <a asp-action="Deliver" asp-route-id="@item.Id" class="btn btn-info" id="btnDeliver">Deliver</a>
+                    <a asp-action="Delete" asp-route-id="@item.Id" class="btn btn-danger" id="btnDelete">Delete</a>
+                </td>
+            </tr>
+        }
     </tbody>
 </table>

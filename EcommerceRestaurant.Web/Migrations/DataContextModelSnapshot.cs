@@ -19,13 +19,34 @@ namespace EcommerceRestaurant.Web.Migrations
                 .HasAnnotation("Relational:MaxIdentifierLength", 128)
                 .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
+            modelBuilder.Entity("EcommerceRestaurant.Web.Data.Entities.City", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<int?>("CountryId");
+
+                    b.Property<string>("Name")
+                        .IsRequired()
+                        .HasMaxLength(50);
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("CountryId");
+
+                    b.ToTable("Cities");
+                });
+
             modelBuilder.Entity("EcommerceRestaurant.Web.Data.Entities.Country", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-                    b.Property<string>("Name");
+                    b.Property<string>("Name")
+                        .IsRequired()
+                        .HasMaxLength(50);
 
                     b.HasKey("Id");
 
@@ -142,6 +163,10 @@ namespace EcommerceRestaurant.Web.Migrations
 
                     b.Property<int>("AccessFailedCount");
 
+                    b.Property<string>("Address");
+
+                    b.Property<int>("CityId");
+
                     b.Property<string>("ConcurrencyStamp")
                         .IsConcurrencyToken();
 
@@ -178,6 +203,8 @@ namespace EcommerceRestaurant.Web.Migrations
                         .HasMaxLength(256);
 
                     b.HasKey("Id");
+
+                    b.HasIndex("CityId");
 
                     b.HasIndex("NormalizedEmail")
                         .HasName("EmailIndex");
@@ -300,6 +327,13 @@ namespace EcommerceRestaurant.Web.Migrations
                     b.ToTable("AspNetUserTokens");
                 });
 
+            modelBuilder.Entity("EcommerceRestaurant.Web.Data.Entities.City", b =>
+                {
+                    b.HasOne("EcommerceRestaurant.Web.Data.Entities.Country")
+                        .WithMany("Cities")
+                        .HasForeignKey("CountryId");
+                });
+
             modelBuilder.Entity("EcommerceRestaurant.Web.Data.Entities.Order", b =>
                 {
                     b.HasOne("EcommerceRestaurant.Web.Data.Entities.User", "User")
@@ -338,6 +372,14 @@ namespace EcommerceRestaurant.Web.Migrations
                     b.HasOne("EcommerceRestaurant.Web.Data.Entities.User", "User")
                         .WithMany()
                         .HasForeignKey("UserId");
+                });
+
+            modelBuilder.Entity("EcommerceRestaurant.Web.Data.Entities.User", b =>
+                {
+                    b.HasOne("EcommerceRestaurant.Web.Data.Entities.City", "City")
+                        .WithMany()
+                        .HasForeignKey("CityId")
+                        .OnDelete(DeleteBehavior.Restrict);
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>

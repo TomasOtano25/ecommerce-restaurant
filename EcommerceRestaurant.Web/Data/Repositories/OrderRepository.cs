@@ -184,5 +184,17 @@
             await this.context.SaveChangesAsync();
             return true;
         }
+
+        public async Task DeliverOrder(DeliverViewModel model)
+        {
+            var order = await this.GetByIdAsync(model.Id);
+            if (order == null)
+            {
+                return;
+            }
+
+            order.DeliveryDate = model.DeliveryDate;
+            await this.UpdateAsync(order);
+        }
     }
 }
