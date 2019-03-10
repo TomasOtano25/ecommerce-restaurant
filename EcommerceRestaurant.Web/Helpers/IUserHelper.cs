@@ -20,5 +20,16 @@
 
         object GenerateToken(User user);
 
+        Task<string> GenerateEmailConfirmationTokenAsync(User user);
+
+        Task<User> GetUserByIdAsync(string userId);
+
+        Task<IdentityResult> ConfirmEmailAsync(User user, string token);
+
+        Task<bool> IsInRoleAsync(User user, string role);
+
+        Task<string> GeneratePasswordResetTokenAsync(User user);
+
+        Task<IdentityResult> ResetPasswordAsync(User user, string token, string newPassword);
     }
 }

@@ -70,9 +70,15 @@
                 }
 
                 await this.userHelper.AddToRoleUserAsync(user, "Admin");
-            }
 
-            if (!this.context.Products.Any())
+                var token = await this.userHelper.GenerateEmailConfirmationTokenAsync(user);
+                await this.userHelper.ConfirmEmailAsync(user, token);
+
+            }
+            //TODO: test
+            var isInRole = await this.userHelper.IsInRoleAsync(user, "Admin");
+
+            if (!this.context.Products.Any() && isInRole)
             {
                 this.AddProduct("First Product", user);
                 this.AddProduct("Second Product", user);

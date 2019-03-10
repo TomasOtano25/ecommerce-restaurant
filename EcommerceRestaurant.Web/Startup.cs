@@ -34,6 +34,8 @@
 
             services.AddIdentity<User, IdentityRole>(cfg =>
             {
+                cfg.Tokens.AuthenticatorTokenProvider = TokenOptions.DefaultAuthenticatorProvider;
+                cfg.SignIn.RequireConfirmedEmail = true;
                 cfg.User.RequireUniqueEmail = true;
                 cfg.Password.RequireDigit = false;
                 cfg.Password.RequiredUniqueChars = 0;
@@ -42,6 +44,7 @@
                 cfg.Password.RequireUppercase = false;
                 cfg.Password.RequiredLength = 6;
             })
+            .AddDefaultTokenProviders()
             .AddEntityFrameworkStores<DataContext>();
 
             // SQL Connection
@@ -67,6 +70,8 @@
             services.AddScoped<ITimeZoneIdResolver, GmtTimeZoneIdResolver>();
 
             services.AddScoped<IUserHelper, UserHelper>();
+
+            services.AddScoped<IMailHelper, MailHelper>();
 
             services.Configure<CookiePolicyOptions>(options =>
             {

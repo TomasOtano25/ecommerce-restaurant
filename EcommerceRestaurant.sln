@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio 15
-VisualStudioVersion = 15.0.28307.421
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.28705.295
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Backend", "Backend", "{A002DF62-5FF3-4B9A-97EE-6BE82EECD911}"
 EndProject
@@ -25,7 +25,7 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Restaurant.Android", "..\..
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Restaurant.iOS", "..\..\..\..\code\Restaurant\Restaurant.iOS\Restaurant.iOS.csproj", "{BE065D83-2449-4416-9D36-4258C8BB4988}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Restaurant", "..\..\..\..\code\Restaurant\Restaurant\Restaurant.csproj", "{A3C99282-98A4-4524-96D5-31D2C90C592A}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Restaurant", "..\..\..\..\code\Restaurant\Restaurant\Restaurant.csproj", "{A3C99282-98A4-4524-96D5-31D2C90C592A}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

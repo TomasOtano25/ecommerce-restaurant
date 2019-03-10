@@ -79,6 +79,35 @@
             };
         }
 
-        
+        public async Task<string> GenerateEmailConfirmationTokenAsync(User user)
+        {
+            return await this.userManager.GenerateEmailConfirmationTokenAsync(user);
+        }
+
+        public async Task<User> GetUserByIdAsync(string userId)
+        {
+            return await this.userManager.FindByIdAsync(userId);
+        }
+
+        public async Task<IdentityResult> ConfirmEmailAsync(User user, string token)
+        {
+            return await this.userManager.ConfirmEmailAsync(user, token);
+        }
+
+        public async Task<bool> IsInRoleAsync(User user, string role)
+        {
+            return await this.userManager.IsInRoleAsync(user, role);
+        }
+
+        public async Task<string> GeneratePasswordResetTokenAsync(User user)
+        {
+            return await this.userManager.GeneratePasswordResetTokenAsync(user);
+        }
+
+        public async Task<IdentityResult> ResetPasswordAsync(User user, string token, string newPassword)
+        {
+            return await this.userManager.ResetPasswordAsync(user, token, newPassword);
+        }
+
     }
 }
