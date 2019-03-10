@@ -16,7 +16,7 @@
 
         Task<IdentityResult> ChangePasswordUserAsync(User user, string oldPassword, string newPassword);
 
-        Task<IdentityResult> AddToRoleUserAsync(User user, string roleName);
+        Task<IdentityResult> AddUserToRoleUserAsync(User user, string roleName);
 
         object GenerateToken(User user);
 
@@ -26,10 +26,12 @@
 
         Task<IdentityResult> ConfirmEmailAsync(User user, string token);
 
-        Task<bool> IsInRoleAsync(User user, string role);
+        Task<bool> IsUserInRoleAsync(User user, string role);
 
         Task<string> GeneratePasswordResetTokenAsync(User user);
 
         Task<IdentityResult> ResetPasswordAsync(User user, string token, string newPassword);
+
+        Task CheckRoleAsync(string roleName);
     }
 }

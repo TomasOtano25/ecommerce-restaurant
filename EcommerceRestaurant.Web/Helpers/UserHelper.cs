@@ -15,11 +15,13 @@
         private readonly UserManager<User> userManager;
 
         private readonly IOptions<TokenConfig> tokenConfig;
+        private readonly RoleManager<IdentityRole> roleManager;
 
-        public UserHelper(UserManager<User> userManager, IOptions<TokenConfig> tokenConfig)
+        public UserHelper(UserManager<User> userManager, IOptions<TokenConfig> tokenConfig, RoleManager<IdentityRole> roleManager)
         {
             this.userManager = userManager;
             this.tokenConfig = tokenConfig;
+            this.roleManager = roleManager;
         }
 
         public async Task<IdentityResult> AddUserAsync(User user, string password)
@@ -48,7 +50,7 @@
             return await this.userManager.ChangePasswordAsync(user, oldPassword, newPassword);
         }
 
-        public async Task<IdentityResult> AddToRoleUserAsync(User user, string roleName)
+        public async Task<IdentityResult> AddUserToRoleUserAsync(User user, string roleName)
         {
             return await this.userManager.AddToRoleAsync(user, roleName);
         }
@@ -94,7 +96,7 @@
             return await this.userManager.ConfirmEmailAsync(user, token);
         }
 
-        public async Task<bool> IsInRoleAsync(User user, string role)
+        public async Task<bool> IsUserInRoleAsync(User user, string role)
         {
             return await this.userManager.IsInRoleAsync(user, role);
         }
@@ -107,6 +109,18 @@
         public async Task<IdentityResult> ResetPasswordAsync(User user, string token, string newPassword)
         {
             return await this.userManager.ResetPasswordAsync(user, token, newPassword);
+        }
+
+        public async Task CheckRoleAsync(string roleName)
+        {
+            var roleExists = await this.roleManager.RoleExistsAsync(roleName);
+            if (!roleExists)
+            {
+                await this.roleManager.CreateAsync(new IdentityRole
+                {
+                    Name = roleName
+                });
+            }
         }
 
     }
