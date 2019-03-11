@@ -26,16 +26,18 @@
                 .FirstOrDefaultAsync(e => e.Id == id);
         }
 
-        public async Task CreateAsync(T entity)
+        public async Task<T> CreateAsync(T entity)
         {
             await this.context.Set<T>().AddAsync(entity);
             await SaveAllAsync();
+            return entity;
         }
 
-        public async Task UpdateAsync(T entity)
+        public async Task<T> UpdateAsync(T entity)
         {
             this.context.Set<T>().Update(entity);
             await SaveAllAsync();
+            return entity;
         }
 
         public async Task DeleteAsync(T entity)
@@ -53,6 +55,11 @@
         public async Task<bool> SaveAllAsync()
         {
             return await this.context.SaveChangesAsync() > 0;
+        }
+
+        public async Task<long> LongCountAync()
+        {
+            return await this.context.Set<T>().LongCountAsync();
         }
     }
 }
